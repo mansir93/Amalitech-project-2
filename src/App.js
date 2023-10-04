@@ -4,22 +4,21 @@ import Home from "./Pages/Home";
 import Product from "./Pages/Product";
 import Checkout from "./Pages/Checkout";
 import Cart from "./Pages/Cart";
-import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
+import Invoice from "./Pages/Invoice";
+
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/invoice" element={<Invoice />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

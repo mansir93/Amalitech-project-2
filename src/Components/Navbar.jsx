@@ -1,42 +1,50 @@
-import { BsFillCartCheckFill } from "react-icons/bs"; 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { BsFillCartCheckFill } from "react-icons/bs";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
+import { Context } from "../utils/Context";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const { cart } = useContext(Context);
+  // console.log(cart);
   const NavList = (
     <>
-      <p>categories</p>
-      <p>what's New</p>
-      <p>Deals</p>
-      <p>Delivery</p>
+      <Link to="/">categories</Link>
+      <Link to="/">what's New</Link>
+      <Link to="/">Deals</Link>
+      <Link to="/">Delivery</Link>
     </>
   );
-  const userCart = (
+  const TopCart = (
     <div className="flex items-center gap-3">
-      <button className="bg-blue-500 text-white font-bold px-4 py-2 rounded-xl">Account</button>
-      <BsFillCartCheckFill size={40} className="text-blue-500"/>
+    
+      <Link to="/cart" className="relative inline-block">
+        <BsFillCartCheckFill size={40} className="text-orange-500" />
+        <span className="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center w-6 h-6 text-white bg-orange-500 rounded-full">
+          {cart.length}
+        </span>
+      </Link>
     </div>
   );
   return (
     <div className="w-full">
-      <nav class="bg-gray-800 lg:p-4 p-2">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <nav className="bg-gray-800 lg:p-4 p-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div>
-            <a href="#!" className="flex items-center mb-4 sm:mb-0">
+            <Link to="/" className="flex items-center mb-4 sm:mb-0">
               <img src={""} className="h-8 mr-3" alt=" Logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
                 Mansir
               </span>
-            </a>
+            </Link>
           </div>
-          {/* <div className="flex "> */}
 
           <div className="hidden lg:flex gap-5 text-white capitalize font-bold">
             {NavList}
           </div>
           <div className="hidden lg:flex">
-            <button type="button">{userCart}</button>
+            <div>{TopCart}</div>
           </div>
           <div className="lg:hidden">
             {toggleMenu ? (
@@ -55,7 +63,7 @@ const Navbar = () => {
             {toggleMenu && (
               <div className="scale-up-center absolute bg-gray-600 p-4 right-3 top-16 flex flex-col gap-4">
                 <div className="text-white capitalize font-bold flex flex-col gap-4">
-                  {NavList} <button type="button">{userCart}</button>
+                  {NavList} <div>{TopCart}</div>
                 </div>
               </div>
             )}

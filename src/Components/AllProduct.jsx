@@ -16,12 +16,7 @@ const AllProduct = () => {
 
   const fetchProducts = async () => {
     axios
-      .get("https://fakestoreapi.com/products", {
-        params: {
-          limit: "",
-          sort: "Rain",
-        },
-      })
+      .get("https://fakestoreapi.com/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   };

@@ -12,12 +12,31 @@ const AllProduct = () => {
     increaseQuantity,
     decreaseQuantity,
   } = useContext(Context);
+
   const [products, setProducts] = useState([]);
+  // console.log(products);
+  const [nameInput, setNameInput] = useState("");
+  const [categoryInput, setCategoryInput] = useState("");
+  const [priceMinInput, setPriceMinInput] = useState("");
+  const [priceMaxInput, setPriceMaxInput] = useState("");
+
+  const filteredProducts = products.filter((product) => {
+    return (
+      (nameInput === "" ||
+        product.title.toLowerCase().includes(nameInput.toLowerCase())) &&
+      (categoryInput === "" ||
+        product.category.toLowerCase() === categoryInput.toLowerCase()) &&
+      (priceMinInput === "" || product.price >= priceMinInput) &&
+      (priceMaxInput === "" || product.price <= priceMaxInput)
+    );
+  });
 
   const fetchProducts = async () => {
     axios
       .get("https://fakestoreapi.com/products")
-      .then((res) => setProducts(res.data))
+      .then((res) => {
+        setProducts(res.data);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -28,14 +47,49 @@ const AllProduct = () => {
   return (
     <section id="product">
       <div className="flex lg:min-h-[80vh] p-4 gap-5 flex-col lg:flex-row bg-gray-200">
-        <div className="flex-1 bg-gray-800 rounded-3xl p-2">left</div>
+        <div className="flex-1 bg-gray-800 rounded-3xl p-2">
+          <div className="w-full flex flex-wrap lg:flex-col justify-center items-center gap-10 p-4">
+            <h1 className="text-xl text-white font-bold">Products Search and filters </h1>
+            <input
+              type="text"
+              placeholder="Search by name"
+              value={nameInput}
+              onChange={(e) => setNameInput(e.target.value)}
+              className="p-2 rounded-md"
+            />
+
+            <input
+              type="text"
+              placeholder="Search by category"
+              value={categoryInput}
+              onChange={(e) => setCategoryInput(e.target.value)}
+              className="p-2 rounded-md"
+            />
+
+            <input
+              type="number"
+              placeholder="Minimum price"
+              value={priceMinInput}
+              onChange={(e) => setPriceMinInput(e.target.value)}
+              className="p-2 rounded-md"
+            />
+
+            <input
+              type="number"
+              placeholder="Maximum price"
+              value={priceMaxInput}
+              onChange={(e) => setPriceMaxInput(e.target.value)}
+              className="p-2 rounded-md"
+            />
+          </div>
+        </div>
         <div className="flex-[4] flex flex-col">
           <div className="bg- gray-800 rounded-3xl p-2">
             {" "}
             <h1 className="font-bold text-3xl border-b-2">Products</h1>
             <div className="flex justify-center">
               <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-4 gap-y-8 py-8">
-                {products?.map((product, i) => (
+                {filteredProducts?.map((product, i) => (
                   <div
                     key={i}
                     className="max-w-xs flex flex-col items-center justify-center bg-white border border-gray-200 rounded-lg shadow "

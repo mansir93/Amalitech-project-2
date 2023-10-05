@@ -34,9 +34,7 @@ const AllProduct = () => {
   const fetchProducts = async () => {
     axios
       .get("https://fakestoreapi.com/products")
-      .then((res) => {
-        setProducts(res.data);
-      })
+      .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   };
 
@@ -49,7 +47,9 @@ const AllProduct = () => {
       <div className="flex lg:min-h-[80vh] p-4 gap-5 flex-col lg:flex-row bg-gray-200">
         <div className="flex-1 bg-gray-800 rounded-3xl p-2">
           <div className="w-full flex flex-wrap lg:flex-col justify-center items-center gap-10 p-4">
-            <h1 className="text-xl text-white font-bold">Products Search and filters </h1>
+            <h1 className="text-xl text-white font-bold">
+              Products Search and filters{" "}
+            </h1>
             <input
               type="text"
               placeholder="Search by name"

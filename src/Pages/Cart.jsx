@@ -12,7 +12,7 @@ const Cart = () => {
     decreaseQuantity,
     clearCart,
   } = useContext(Context);
-  // console.log(cart);
+  console.log(cart);
   return (
     <Layout>
       <div className="bg-gray-200 flex flex-wrap flex-col lg:flex-row items-center justify-center lg:p-4">
@@ -52,17 +52,19 @@ const Cart = () => {
                   Cart is Empty
                 </div>
               ) : (
-                cart?.map((item) => (
-                  <tbody>
+                <tbody>
+                  {cart?.map((item) => (
                     <tr className="border-b-2 border-gray-300 " key={item.id}>
                       <th scope="row" className="px-6 py-4">
-                        <img
-                          src={item?.image}
-                          alt={item.name}
-                          className="text-center mx-auto h-20 w-20"
-                        />
+                        <Link to={`/product/${item.id}`}>
+                          <img
+                            src={item?.image}
+                            alt={item.name}
+                            className="text-center mx-auto h-20 w-20"
+                          />
+                        </Link>
                       </th>
-                      <th scope="row" className="px-6 py-4 ">
+                      <th scope="row" className="text-xl px-6 py-4 ">
                         {item.title}
                       </th>
                       <td className="px-6 py-4 ">{item.price}</td>
@@ -70,7 +72,7 @@ const Cart = () => {
                         <div className="flex flex-col justify-between items-center py-2 gap-2">
                           <div className="min-w-[40%] flex gap-4 justify-between items-center bg-gray-700 rounded-lg">
                             <button
-                              className="inline-flex items-center px-3 py-2 text-sm font-bold text-center text-white bg-orange-500 rounded-lg hover:bg-orange-400"
+                              className="inline- flex items-center px-3 py-2 text-sm font-bold text-center text-white bg-orange-500 rounded-lg hover:bg-orange-400"
                               onClick={() => increaseQuantity(item?.id)}
                             >
                               +
@@ -78,9 +80,7 @@ const Cart = () => {
                             {cart.map(
                               (p) =>
                                 p?.id === item?.id && (
-                                  <div>
-                                    <span className="text-white">{p?.qty}</span>
-                                  </div>
+                                  <span className="text-white">{p?.qty}</span>
                                 )
                             )}
                             <button
@@ -106,14 +106,15 @@ const Cart = () => {
                         {(item.price * item.qty).toFixed(2)}
                       </td>
                     </tr>
-                  </tbody>
-                ))
+                  ))}
+                </tbody>
               )}
             </table>
           </div>
         </div>
         <div className="w-full flex justify-end gap-4 p-4 text-orange-400 text-xl font-bold">
-          Sub-Total:<span>
+          Sub-Total:
+          <span>
             {cart?.reduce((acc, p) => acc + p.price * p.qty, 0).toFixed(2)}
           </span>
         </div>

@@ -92,7 +92,7 @@ const AllProduct = () => {
                 {filteredProducts?.map((product, i) => (
                   <div
                     key={i}
-                    className="max-w-xs flex flex-col items-center justify-center bg-white border border-gray-200 rounded-lg shadow "
+                    className="max-w-xs flex flex-col items-center justify-between bg-white border border-gray-200 rounded-lg shadow "
                   >
                     <Link to={`/product/${product.id}`}>
                       <img

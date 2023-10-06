@@ -33,8 +33,8 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div>
             <Link to="/" className="flex items-center mb-4 sm:mb-0">
-              <img src={""} className="h-8 mr-3" alt=" Logo" />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+              {/* <img src={""} className="h-8 mr-3" alt=" Logo" /> */}
+              <span className="self-center text-2xl font-bold whitespace-nowrap text-white">
                 Mansir
               </span>
             </Link>

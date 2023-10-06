@@ -18,7 +18,6 @@ const Navbar = () => {
   );
   const TopCart = (
     <div className="flex items-center gap-3">
-    
       <Link to="/cart" className="relative inline-block">
         <BsFillCartCheckFill size={40} className="text-orange-500" />
         <span className="absolute top-0 right-0 -mt-2 -mr-2 inline-flex items-center justify-center w-6 h-6 text-white bg-orange-500 rounded-full">
